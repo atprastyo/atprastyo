@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     final TextStyle textStyle = GoogleFonts.tajawal(color: Colors.black87);
 
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Agus Tri Prastyo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -38,15 +39,13 @@ class MyApp extends StatelessWidget {
         ),
       ),
       // home: const HeaderBanner(),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -59,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        padding: const EdgeInsets.only(right: 0),
+        padding: const EdgeInsets.only(right: 10),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -98,18 +97,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
+                      flex:5,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 32.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(88),
-                          child: Image.asset('images/profile_circle.png',
+                          child: Image.asset(path('images/profile_circle.png'),
                               height: 160),
                         ),
                       ),
                     ),
                     const SizedBox(width: 24.0),
                     Expanded(
-                      flex: 2,
+                      flex: 8,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -200,6 +200,7 @@ class _MyHomePageState extends State<MyHomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
+                  flex: 5,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -227,10 +228,27 @@ class _MyHomePageState extends State<MyHomePage> {
                       const SizedBox(height: 4.0),
                       CardBox(
                         top: false,
-                        child: Text(
-                          "I dedicated to my own continual self development. Currently, I'm developing a mobile application using Flutter with graphql network API integration, then I'm also interested in learning about artificial intelligence and machine learning for research purposes.",
-                          style: textTheme.bodyMedium,
-                          textAlign: TextAlign.justify,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text(
+                              "I'm a person who is passionate about computing technology and I dedicate myself to continuous self-development so that I can keep up with it. \nCurrently, I'm developing a mobile application using Flutter with network API integration and for state management I've used package provider, bloc, and getX.",
+                              style: textTheme.bodyMedium,
+                              textAlign: TextAlign.left,
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Areas of expertise',
+                              style: textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              "Mobile app development, Software development with Flutter, Team management",
+                              style: textTheme.bodyMedium,
+                              textAlign: TextAlign.left,
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(height: 12),
@@ -452,8 +470,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: [
                                   SizedBox(
                                     height: 20.0,
-                                    child:
-                                        Image.asset('images/linkedin-logo.png'),
+                                    child: Image.asset(
+                                        path('images/linkedin-logo.png')),
                                   ),
                                   const SizedBox(width: 8.0),
                                   Expanded(
@@ -481,7 +499,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: [
                                   SizedBox(
                                     height: 22.0,
-                                    child: Image.asset('images/github-logo.png',
+                                    child: Image.asset(
+                                        path('images/github-logo.png'),
                                         color: Colors.blue.shade600,
                                         colorBlendMode: BlendMode.lighten),
                                   ),
@@ -509,26 +528,74 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: [
                                   SizedBox(
                                     height: 22.0,
-                                    child: Image.asset('images/playstore.png'),
+                                    child: Image.asset(
+                                        path('images/playstore.png')),
                                   ),
                                   const SizedBox(width: 8.0),
                                   Text(
-                                    'devid=8932749481565676842',
+                                    'devId=8932749481565676842',
                                     style: textTheme.bodyText2
                                         ?.copyWith(height: 1),
                                   ),
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 6),
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                  padding: EdgeInsets.zero),
+                              onPressed: () async {
+                                final Uri? url =
+                                    Uri.tryParse('https://atprastyo.github.io');
+                                if (!await launchUrl(url!)) {
+                                  throw Exception('Could not launch $url');
+                                }
+                              },
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.person_pin_circle_rounded,
+                                    size: 22,
+                                  ),
+                                  const SizedBox(width: 8.0),
+                                  Text(
+                                    'https://atprastyo.github.io',
+                                    style: textTheme.bodyText2
+                                        ?.copyWith(height: 1),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 10),
                           ],
                         ),
                       ),
+                      const SizedBox(height: 10),
+                      CardBox(
+                        full: true,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 4.0, top: 2.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                'Created with Flutter',
+                                style: textTheme.bodyText1?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              const SizedBox(height: 4.0),
+                              const Text(
+                                'Updated at June, 2023',
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
                 Expanded(
-                  flex: 2,
+                  flex: 8,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 16.0),
                     child: Column(
@@ -568,9 +635,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                 'Software Engineer at Wahyoo, Jakarta',
                                 'September 2019 – Present',
                                 'Developing mobile application with flutter in an agile scrum development process environment. '
-                                    '\nMy responsibilities: \n•  Develop and deploy our built design pattern of mobile application.'
-                                    '\n•  Translating mockups and wireframes design into mobile user interface code.',
-                                'nodejs, graphql, flutter, provider, firebase',
+                                    '\nMy responsibilities:',
+                                [
+                                  'Develop and deploy the built of mobile application.',
+                                  'Translating mockups or wireframes design into mobile user interface code.',
+                                  'Manage team updates and issues that emerge during the development process.'
+                                ],
+                                'nodejs, graphql, flutter, provider, firebase, figma',
                                 'Team management, Mobile app development, Git',
                               ),
                               const Divider(height: 20),
@@ -578,11 +649,15 @@ class _MyHomePageState extends State<MyHomePage> {
                                 context,
                                 'Software Engineer at Twiscode Pte. Ltd., Surabaya',
                                 'September 2018 – August 2019',
-                                'Develop mobile application with React Native in an agile scrum development process environment. Twiscode is a digital agency for brand consultant where update business one step ahead with technology.',
+                                'Develop mobile application with React Native in an agile scrum development process environment.'
+                                    '\nMy responsibilities:',
+                                [
+                                  'Develop and deploy the built of mobile application.',
+                                  'Translating mockups or wireframes design into mobile user interface code.'
+                                ],
                                 'react native, androidx, kotlin, rest API',
                                 'Team management, Mobile app development, Git',
                               ),
-                              const SizedBox(height: 8.0),
                             ],
                           ),
                         ),
@@ -656,7 +731,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 8),
                             ],
                           ),
                         ),
@@ -680,9 +754,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _workExperience(
     context,
-    String s,
+    String title,
     String t,
     String u,
+    List<String> tasks,
     String v,
     String w,
   ) {
@@ -691,16 +766,16 @@ class _MyHomePageState extends State<MyHomePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          t,
-          style: textTheme.subtitle2?.copyWith(
-            color: Colors.black54,
+          title,
+          style: textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w600,
           ),
         ),
         const SizedBox(height: 4),
         Text(
-          s,
-          style: textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
+          t,
+          style: textTheme.subtitle2?.copyWith(
+            color: Colors.black54,
           ),
         ),
         const SizedBox(height: 6),
@@ -708,6 +783,21 @@ class _MyHomePageState extends State<MyHomePage> {
           u,
           style: textTheme.bodyMedium?.copyWith(color: Colors.black),
           textAlign: TextAlign.left,
+        ),
+        ...tasks.map(
+          (task) => Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('•  '),
+              Expanded(
+                child: Text(
+                  task,
+                  style: textTheme.bodyMedium?.copyWith(color: Colors.black),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 6),
         Row(
@@ -745,21 +835,25 @@ class CardBox extends StatelessWidget {
     this.child,
     this.padding,
     this.top = true,
+    this.full = false,
   }) : super(key: key);
 
   final Widget? child;
   final EdgeInsets? padding;
   final bool top;
+  final bool full;
 
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.vertical(
-          top: top ? const Radius.circular(8) : Radius.zero,
-          bottom: top ? Radius.zero : const Radius.circular(8),
-        ),
+        borderRadius: full
+            ? BorderRadius.circular(8)
+            : BorderRadius.vertical(
+                top: top ? const Radius.circular(8) : Radius.zero,
+                bottom: top ? Radius.zero : const Radius.circular(8),
+              ),
         boxShadow: const [
           BoxShadow(
             color: Colors.black12,
@@ -769,7 +863,7 @@ class CardBox extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: padding ?? const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+        padding: padding ?? EdgeInsets.fromLTRB(10, 10, 10, top ? 0 : 10),
         child: child,
       ),
     );
@@ -809,8 +903,8 @@ class HeaderBanner extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'images/dev-icon-transparent.png',
-              color: Color(0xff10b981),
+              path('images/dev-icon-transparent.png'),
+              color: const Color(0xff10b981),
             ),
             // const SizedBox(width: 32),
             // Text(
@@ -827,4 +921,8 @@ class HeaderBanner extends StatelessWidget {
       ),
     );
   }
+}
+
+String path(str) {
+  return (kIsWeb) ? 'assets/$str' : str;
 }
