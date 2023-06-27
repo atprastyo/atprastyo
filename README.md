@@ -1,1 +1,1 @@
-# Hello, wellcome to my git!
+# Hello, welcome to my git!
