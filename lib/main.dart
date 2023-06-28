@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -52,6 +55,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  double blurRadius = 6;
+
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      Timer.periodic(const Duration(milliseconds: 1000), (timer) {
+        setState(() {
+          blurRadius = blurRadius == 20 ? 6 : 20;
+        });
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
@@ -82,7 +99,9 @@ class _MyHomePageState extends State<MyHomePage> {
             DecoratedBox(
               decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(8),
+                ),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black26,
@@ -97,13 +116,36 @@ class _MyHomePageState extends State<MyHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
-                      flex:5,
+                      flex: 5,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(88),
-                          child: Image.asset(path('images/profile_circle.png'),
-                              height: 160),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            AnimatedContainer(
+                              width: 159,
+                              height: 158,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(88),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.blue.shade200,
+                                    offset: const Offset(0, 1),
+                                    blurRadius: blurRadius,
+                                  )
+                                ],
+                              ),
+                              duration: const Duration(milliseconds: 800),
+                            ),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(88),
+                              child: Image.asset(
+                                path('images/profile_circle.png'),
+                                height: 160,
+                                width: 160,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -147,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                               const SizedBox(width: 4.0),
                               Text(
-                                'agustrip@gmail.com',
+                                'agustrip.com@gmail.com',
                                 style: textTheme.bodyText2?.copyWith(
                                   height: 1.4,
                                   color: Colors.black,
@@ -336,7 +378,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      'Android',
+                                      'Android Native',
                                       style: textTheme.subtitle1?.copyWith(
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -905,17 +947,18 @@ class HeaderBanner extends StatelessWidget {
             Image.asset(
               path('images/dev-icon-transparent.png'),
               color: const Color(0xff10b981),
+              scale: 3,
             ),
-            // const SizedBox(width: 32),
-            // Text(
-            //   'Madevagust',
-            //   style: GoogleFonts.aclonica(
-            //     fontWeight: FontWeight.w600,
-            //     fontSize: 60,
-            //     color: Color(0xff10b981),
-            //     decoration: TextDecoration.none,
-            //   ),
-            // ),
+            const SizedBox(width: 32),
+            Text(
+              'Tasbih',
+              style: GoogleFonts.aclonica(
+                fontWeight: FontWeight.w600,
+                fontSize: 60,
+                color: const Color(0xff10b981),
+                decoration: TextDecoration.none,
+              ),
+            ),
           ],
         ),
       ),
