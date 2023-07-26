@@ -1,11 +1,11 @@
 {
-    "name": "my_profile",
-    "short_name": "my_profile",
+    "name": "Agus Tri Prastyo",
+    "short_name": "agust",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Agust profile project",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
