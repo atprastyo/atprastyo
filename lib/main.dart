@@ -630,7 +630,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 TextButton.styleFrom(padding: EdgeInsets.zero),
                             onPressed: () async {
                               final Uri? url = Uri.tryParse(
-                                'www.linkedin.com/in/agustrip',
+                                'www.linkedin.com/in/atprastyo',
                               );
                               if (!await launchUrl(url!)) {
                                 throw Exception('Could not launch $url');
@@ -646,7 +646,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 const SizedBox(width: 8.0),
                                 Expanded(
                                   child: Text(
-                                    'www.linkedin.com/in/agustrip',
+                                    'www.linkedin.com/in/atprastyo',
                                     style: textTheme.bodyMedium
                                         ?.copyWith(height: 1),
                                   ),
