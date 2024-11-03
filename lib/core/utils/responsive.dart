@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Responsive extends StatelessWidget {
@@ -12,7 +13,7 @@ class Responsive extends StatelessWidget {
     required this.desktop,
   }) : super(key: key);
 
-// This size work fine on my design, maybe you need some customization depends on your design
+  /// This size work fine on my design, maybe you need some customization depends on your design
 
   // This isMobile, isTablet, isDesktop help us later
   static bool isMobile(BuildContext context) =>
@@ -41,4 +42,8 @@ class Responsive extends StatelessWidget {
       return mobile;
     }
   }
+}
+
+String path(str) {
+  return (kIsWeb) ? 'assets/$str' : str;
 }
